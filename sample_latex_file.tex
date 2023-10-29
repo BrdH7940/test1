@@ -1,0 +1,230 @@
+%
+%  PREAMBLE 
+%
+%
+
+%
+% Note that lines preceded by "%" won't get formatted. So I can put comments there.
+%
+
+\documentclass[11pt]{amsart} 
+% 11pt is text size. You may want 12pt instead, but not smaller that 11pt please.  
+% amsart gives access to many latex math symbols (from the AMS = American Mathematical Society)
+\pagestyle{empty}  % Avoids page numbers
+
+% Some self-defined commands, as shorthand for the standard latex commands. 
+% E.g. I just type \N rather than having to type \mathbb{N} all the time. 
+
+\newcommand{\N}{\mathbb{N}}  % Natural numbers
+\newcommand{\Z}{\mathbb{Z}}  % Integers
+\newcommand{\R}{\mathbb{R}}  % Real numbers
+\newcommand{\C}{\mathbb{C}}  % Complex numbers
+\newcommand{\p}{\partial}  %  for partial derivatives
+\newcommand{\f}{\frac} % fractions
+
+% The stuff below is for augmented matrices. I got this off the web. I have no idea what it is doing, as long as it works. 
+%
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+
+
+
+% --------------
+% THE DOCUMENT
+% --------------
+
+\begin{document}
+\thispagestyle{empty}   
+
+\begin{center}
+{\bf \LARGE Sample Latex File}\\
+% \\ gives a line break
+% \bf means bold face
+% \LARGE, \Large, \large, \small changing the  
+{\bf \large \date{today}   }
+\end{center}
+% \today produces today's date. You can, of course, also put a fixed date
+\vskip.1in
+% This creates extra vertical space of 0.1 inches
+%
+Your TA will love it if you hand in a typed version of your assignment! The text below 
+gives some ideas of how to use the latex symbols. Lots of additional examples, and list of commands, can be found on the internet. \\
+
+To turn the raw Latex file (the \emph{source file}), with ending ".tex", into a pdf (or dvi) file, you'll have to format it. Eventually, you probably want to have some latex installation on your computer (so you don't need 
+access to the web).  You can download everything for free from the internet, but it may take some time to get it running.\footnote{ Don't ask me, I'm not good with computers. I managed to do it myself, but forgot.} \\
+
+Alternatively, its also possible to use online compilers. For the homework problems, this may be quite enough. For example, if you use 
+\begin{quote}
+{\tt \small http://latex.informatik.uni-halle.de/latex-online/latex.php}
+\end{quote}
+(switch to English),  you just copy-and-paste the entire raw text (=source file) into the window, press \emph{compile}, and the scroll down to retrieve the pdf file. Note that you sometimes have to compile twice, to get the cross-references right.  For example, you could try it with the latex source file for this document, titled \verb!sample_latex_file.tex!.
+
+\section{Latex basics}
+There's lots of information on the internet, I don't have to repeat it. Just enter `latex for beginners' or similar into your search engine. 
+
+Important: any command "\verb!\begin{...}!" gets  closed with "\verb!\end{...}!",
+$\verb!\left{..}!$ gets closed with $\verb!\right{..}!$ , and any curly bracket that opens up  "\verb!{!" also gets closed, "\verb!}!". If there are too many errors of that sort, the compiler will balk, or the outcome is a mess. 
+
+Also, whatever comes after \verb!%! on a given line in the source file, the compiler will ignore. We can e.g. use this to put comments into the source file,  as reminders for ourselves.  
+ 
+
+\section{Matrices and vectors}
+Here is a typical matrix. 
+$$ \left( 
+\begin{array}{ccc}   % Here ccc means that we have three columns, all centered. 
+7 & -1 & 3 \\ -10 & 5 & 2
+\end{array}\right)
+$$
+We can also do this :
+$$ \left( 
+\begin{array}{cccc}   % Here cccc means that we have four columns, all centered. 
+a_{11} & a_{12} & \cdots & a_{1n} \\ 
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots  &            & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{array}\right)
+$$
+%
+A column vector is a matrix with one column, as in the following equation
+%
+$$\left( 
+\begin{array}{ccc}   
+7 & -1 & 3 \\ -10 & 5 & 2
+\end{array}\right)
+ \left( 
+\begin{array}{c}   
+x \\ y \\ z 
+\end{array}\right)
+=
+ \left( 
+\begin{array}{c}   
+17 \\ -1 
+\end{array}
+\right)
+$$
+Here is the same equation written as a system of equations. 
+$$ 7 x -y +3 x    = 17,$$
+$$ -10 x +5y+2z  = -1.$$
+That doesn't look so great, does it? Better is: 
+\begin{align*}
+7 x -y +3 x   & = 17\\
+-10 x +5y+2z & = -1.
+\end{align*}
+Here I used the \verb!\begin{align*}!, 
+\verb!\end{align*}! environment in order to align the equations nicely, along 
+the = signs. (Without the stars, one gets numbered equations -- see below.) 
+
+At some stage, you may also need `augmented matrices', such as 
+\[
+\begin{pmatrix}[ccc|cc]
+A_{11}& \cdots & A_{1n}& b_1&  c_1 \\ 
+\vdots & & \vdots   & \!\!\vdots &  \vdots \\ 
+A_{m1}& \cdots & A_{mn}& b_m &  c_m
+ \end{pmatrix}
+\]
+For this to work, you must have a certain blurb in the preamble -- take a look at the preamble to the source file. 
+Ask me not what this is doing, I just copied it off the web. (Whenever you don't know how to typest something, you'll usually find the answer on the internet.)
+
+
+
+
+
+A few more things: 
+\begin{itemize}
+\item 
+%
+$$ \underbrace{1+1+\ldots +1}_{n\ \mbox {\tiny times} }$$
+%
+Here I used \verb!\mbox! to write text in the equation. 
+\item 
+Sets: 
+$$ A\subseteq B,\ \ \ A\times B,\ \ x\in A,\ \ \ \bigcap_{i=1}^n A_n=\emptyset,\ \ \ \ \ 
+\N=\{1,2,3,\ldots\}.$$
+\item 
+Sums, fractions: 
+$$ 6\cdot \sum_{i=1}^n \f{1}{n^2}=\pi^2.$$
+\item
+Other fonts: $\mathfrak{A},\mathfrak{B}$ or $\mathcal{A},\mathcal{B}$ or 
+$\mathsf{A},\mathsf{B}$, also in lower case: $\mathfrak{a}, \mathfrak{b}$, etc.. 
+Greek letters: $\alpha,\beta,\gamma,\delta$, and so on. 
+\end{itemize}
+
+
+\section{Proofs}
+%
+Here are some symbols that you may encounter in analysis: 
+%
+\[ \forall \epsilon >0 \exists \delta >0 \forall x\colon |x-a|<\epsilon \Rightarrow 
+|f(x)-f(a)|<\delta.\]
+%
+This looks  jumbled because of bad spacings. Using "\verb!\!" and "\verb!\,!", we can adjust the spacings: 
+%
+\[ \forall \epsilon >0\  \exists \delta >0\  \forall x\colon |x-a|<\epsilon\,  
+\Rightarrow\,  
+|f(x)-f(a)|<\delta.\]
+That's better! 
+\newpage % I'm starting a new page! 
+
+Here is a typical proof. 
+\vskip.2in
+
+{\bf Theorem.}
+In the field $\C$ of complex numbers, $1=-1$. 
+\vskip.1in
+\begin{proof}
+We use $i=\sqrt{-1}$, as follows: 
+\begin{align*} -1=i\cdot i & \Rightarrow  -1=\sqrt{-1}\cdot \sqrt{-1}\\
+& \Rightarrow  -1=\sqrt{(-1)\cdot (-1)}\\
+& \Rightarrow -1=\sqrt{1}\\
+&\Leftrightarrow -1=1. 
+\end{align*}
+\end{proof}
+\noindent{\bf Remark:} This proof (from lecture notes of Dror Bar-Natan) is completely wrong, of course!! But at least, it is neatly arranged. Could also write it as a one-liner: 
+$$ -1=i\cdot i=\sqrt{-1}\cdot \sqrt{-1}=\sqrt{(-1)\cdot (-1)}=\sqrt{1}=1.$$
+
+
+\section{Numberings}
+If there are several parts to an argument, you can use the \verb!\itemize! or 
+\verb!\enumerate! environments to organize them. \verb!\itemize! gives
+\begin{itemize}
+\item First item, 
+\item Second item. 
+\end{itemize}
+while \verb!\enumerate! produces
+\begin{enumerate}
+\item First item,
+\item Second item.
+\end{enumerate}
+%
+If you want to enumerate displayed equations, instead of using \verb!$$!, use the \verb!{equation}! environment. (Latex will put the numbers automatically, but you can also customize it.) Use \verb!\label! to give your equation a label, and \verb!\ref! to refer to it later. (You have to compile twice so that latex will understand.) For instance, 
+ %
+\begin{equation}\label{continuity}
+\forall \epsilon >0\  \exists \delta >0\  \forall x\colon |x-a|<\epsilon\,  
+\Rightarrow\,  
+|f(x)-f(a)|<\delta.
+\end{equation}
+or 
+\begin{equation}\label{einstein}
+E=m c^2
+\end{equation}
+will be referred to as (\ref{continuity}) and \eqref{einstein}. 
+% \eqref is a shortcut
+
+\vskip.6in
+\begin{center}
+\Large 
+\it
+Enjoy!
+\end{center}
+\end{document}
+
+
+
+
+
+
